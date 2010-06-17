@@ -9,7 +9,7 @@ class AutoComplete(object):
     def __init__(self):
         self.settings = dict()
 
-    def __call__(self, request, ac_name, query_param='query'):
+    def __call__(self, request, ac_name, query_param='q'):
         if not self.settings.get(ac_name):
             return self.not_found(ac_name)
 
@@ -21,9 +21,8 @@ class AutoComplete(object):
         filter = Q()
         for field in fields:
             if not '__' in field:
-                field = '%s__startswith' % field
+                field = '%s__istartswith' % field
             filter |= Q(**{field: query})
-        
         qs = qs.filter(filter)[:limit]
         
         if isinstance(label, basestring):

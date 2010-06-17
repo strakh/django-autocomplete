@@ -3,7 +3,7 @@ function jquery_autocomplete(name, ac_url, force_selection) {
         var input = $('#id_' + name);
         var hidden_input = $('#id_hidden_' + name);
         input.autocomplete(ac_url, {
-            limit: 10,
+            max: 0,
             dataType: 'json',
             parse: function(data) {
                 var parsed = [];
